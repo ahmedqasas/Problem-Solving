@@ -1,0 +1,56 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+vector<vector<int>> cards = {
+   {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29},
+   {2, 3, 6, 7, 10, 11, 14, 15, 18, 19, 22, 23, 26, 27, 30},
+   {4, 5, 6, 7, 12, 13, 14, 15, 20, 21, 22, 23, 28, 29, 30},
+   {8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30},
+   {16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30}
+};
+
+
+void displayCard(const vector<int>& card, int cardNumber) {
+   cout << "\n--- Card " << cardNumber + 1 << " ---\n";
+   for (int i = 0; i < card.size(); ++i) {
+      cout << card[i] << "\t";
+      if ((i + 1) % 5 == 0) cout << endl;
+   }
+   cout << endl;
+}
+
+int main() {
+   char playAgain = 'Y';
+
+   int cardValues[] = {1, 2, 4, 8, 16};
+
+   cout << " Welcome to the Magic Math Guessing Game!\n";
+   cout << "---------------------------------------------\n";
+   cout << "Think of a number between 1 and 30.\n";
+   cout << "I will show you 5 cards, and you just tell me whether your number is in the card or not.\n";
+
+   while (playAgain == 'Y' || playAgain == 'y') {
+      int guessedNumber = 0;
+
+      for (int i = 0; i < 5; ++i) {
+         displayCard(cards[i], i);
+         char response;
+         cout << "Is your number in this card? (Y/N): ";
+         cin >> response;
+
+         if (response == 'Y' || response == 'y') {
+            guessedNumber += cardValues[i];
+         }
+      }
+
+      cout << "\n Your number is: " << guessedNumber << " \n";
+
+      cout << "\nWould you like to play again? (Y/N): ";
+      cin >> playAgain;
+   }
+
+   cout << "\nThanks for playing! Goodbye \n";
+   return 0;
+}
